@@ -9,11 +9,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.util.Assert;
-
-import freemarker.core.LocalContext;
-
-
 
 
 	public class Calc extends Report{
