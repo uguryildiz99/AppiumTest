@@ -7,11 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
-
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.util.Assert;
 
-import oracle.jdbc.logging.annotations.Logging;
+import freemarker.core.LocalContext;
 
 
 
@@ -34,11 +34,11 @@ import oracle.jdbc.logging.annotations.Logging;
 	
 	
 	}
-
+	
 	
 	@Test
 	public void testCal() throws Exception {
-
+		
 		ExtentTest calc1 = extent.createTest("Hesap Makinesi", "Çarpma İşlemi");
 		calc1.log(Status.INFO, "Hesap makinesi açıldı");
 		
@@ -48,6 +48,8 @@ import oracle.jdbc.logging.annotations.Logging;
 			calc1.log(Status.PASS, "7'ye basıldı");
 		}catch (Exception e) {
 			calc1.log(Status.FAIL, "7'ye basılamadı");
+			calc1.fail(e);
+			junit.framework.Assert.fail();
 			extent.flush();
 			
 		}
@@ -58,6 +60,9 @@ import oracle.jdbc.logging.annotations.Logging;
 			calc1.log(Status.PASS, "+ ' ya basıldı. ");
 		}catch (Exception e) {
 			calc1.log(Status.FAIL, "+ ' ya basılamadı. ");
+			calc1.fail(e);
+			junit.framework.Assert.fail();
+			extent.flush();
 		}
 		
 		
@@ -67,7 +72,9 @@ import oracle.jdbc.logging.annotations.Logging;
 			calc1.log(Status.PASS, "2'ye basıldı.");
 		}catch (Exception e) {
 			calc1.log(Status.FAIL, "2'ye basılamadı. ");
-			
+			calc1.fail(e);
+			junit.framework.Assert.fail();
+			extent.flush();
 		}
 		
 		
@@ -77,6 +84,9 @@ import oracle.jdbc.logging.annotations.Logging;
 			calc1.log(Status.PASS, "Eşittir'e basıldı");
 		}catch (Exception e) {
 			calc1.log(Status.FAIL, "Eşittir'e basılamadı. ");
+			calc1.fail(e);
+			junit.framework.Assert.fail();
+			extent.flush();
 		}
 		
 		
@@ -86,6 +96,9 @@ import oracle.jdbc.logging.annotations.Logging;
 			calc1.log(Status.PASS,"Sonuç: "+ a);
 		}catch (Exception e) {
 			calc1.log(Status.FAIL, "Sonuç alınamadı.");
+			calc1.fail(e);
+			junit.framework.Assert.fail();
+			extent.flush();
 		}
 		
 		

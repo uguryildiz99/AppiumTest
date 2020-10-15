@@ -5,7 +5,9 @@
     <classes>
       <class name="testAppium.Calc">
         <methods>
+          <include name="reportSetup"/>
           <include name="teardown"/>
+          <include name="reportTearDown"/>
           <include name="setUp"/>
           <include name="testCal"/>
         </methods>
