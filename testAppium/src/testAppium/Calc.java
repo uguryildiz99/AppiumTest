@@ -3,6 +3,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
@@ -10,6 +11,7 @@ import org.testng.annotations.*;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
+import oracle.jdbc.logging.annotations.Logging;
 
 
 
@@ -32,6 +34,7 @@ import com.aventstack.extentreports.Status;
 	
 	
 	}
+
 	
 	@Test
 	public void testCal() throws Exception {
@@ -39,20 +42,56 @@ import com.aventstack.extentreports.Status;
 		ExtentTest calc1 = extent.createTest("Hesap Makinesi", "Çarpma İşlemi");
 		calc1.log(Status.INFO, "Hesap makinesi açıldı");
 		
-		driver.findElement(By.xpath("//android.widget.Button[@text='7']")).click();
-		calc1.log(Status.PASS, "7'ye basıldı");
+		try {
+			WebElement seven = driver.findElement(By.xpath("//android.widget.Button[@text='7']"));
+			seven.click();
+			calc1.log(Status.PASS, "7'ye basıldı");
+		}catch (Exception e) {
+			calc1.log(Status.FAIL, "7'ye basılamadı");
+			extent.flush();
+			
+		}
+		
+		try {
+			WebElement plus = driver.findElement(By.xpath("//android.widget.ImageView[@resource-id='com.android.calculator2:id/op_mul']"));
+			plus.click();
+			calc1.log(Status.PASS, "+ ' ya basıldı. ");
+		}catch (Exception e) {
+			calc1.log(Status.FAIL, "+ ' ya basılamadı. ");
+		}
 		
 		
-		driver.findElement(By.xpath("//android.widget.ImageView[@resource-id='com.android.calculator2:id/op_mul']")).click();
-		calc1.log(Status.PASS, "+ ' ya basıldı. ");
+		try {
+			WebElement two = driver.findElement(By.xpath("//android.widget.Button[@text='2']"));
+			two.click();
+			calc1.log(Status.PASS, "2'ye basıldı.");
+		}catch (Exception e) {
+			calc1.log(Status.FAIL, "2'ye basılamadı. ");
+			
+		}
 		
-		driver.findElement(By.xpath("//android.widget.Button[@text='2']")).click();
-		calc1.log(Status.PASS, "2'ye basıldı.");
 		
-		driver.findElement(By.xpath("//android.widget.ImageView[@resource-id='com.android.calculator2:id/eq']")).click();
-		calc1.log(Status.PASS, "Eşittir'e basıldı");
+		try {
+			WebElement equals = driver.findElement(By.xpath("//android.widget.ImageView[@resource-id='com.android.calculator2:id/eq']"));
+			equals.click();
+			calc1.log(Status.PASS, "Eşittir'e basıldı");
+		}catch (Exception e) {
+			calc1.log(Status.FAIL, "Eşittir'e basılamadı. ");
+		}
+		
+		
+		try {
+			WebElement result = driver.findElement(By.xpath("//android.widget.EditText[@resource-id='com.android.calculator2:id/formula']"));
+			String a = result.getText();
+			calc1.log(Status.PASS,"Sonuç: "+ a);
+		}catch (Exception e) {
+			calc1.log(Status.FAIL, "Sonuç alınamadı.");
+		}
+		
 		
 		calc1.log(Status.INFO, "İşlem bitti.");
+		
+		
 	}
 	
 	
